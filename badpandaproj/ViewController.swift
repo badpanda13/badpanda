@@ -15,6 +15,12 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-
+    @IBAction func alertButton(_ sender: Any) {
+        let alertController = UIAlertController(title: "Опрос", message: "Кто молодец??", preferredStyle: .alert)
+        let alert = UIAlertAction(title: "Белки!!!", style: .default)
+        alertController.addAction(alert)
+        self.present(alertController, animated: true, completion:nil)
+    }
+    
 }
 
