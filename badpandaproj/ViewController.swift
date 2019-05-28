@@ -11,12 +11,28 @@ import UIKit
 class ViewController: UIViewController {
 
     let mySwitch = UISwitch()
+    let myButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        switchCreation()
+        buttonCreation()
         
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    func buttonCreation(){
+        //button
+        self.myButton.frame = CGRect(x: 200, y: 200, width: 400, height: 100)
+        self.myButton.backgroundColor = UIColor.blue
+        self.myButton.setTitle("Кто молодцы??", for: .normal)
+        self.myButton.setTitle("Белки молодцы!", for: .highlighted)
+        self.view.addSubview(myButton)
+    }
+    
+    func switchCreation(){
         //creation of switch
-      //  self.mySwitch.frame = CGRect(x: 100, y: 100, width: 0, height: 0)
+        //  self.mySwitch.frame = CGRect(x: 100, y: 100, width: 0, height: 0)
         self.mySwitch.center = self.view.center
         self.view.addSubview(mySwitch)
         //turn this shit on
@@ -31,9 +47,8 @@ class ViewController: UIViewController {
         //handler
         self.mySwitch.addTarget(self, action: #selector(switchChange(paramTarget: )), for: .valueChanged)
         
-        // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
    @objc func switchChange(paramTarget: UISwitch){
         print("param is = ",paramTarget)
         if paramTarget.isOn {
