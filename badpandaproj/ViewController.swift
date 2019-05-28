@@ -18,8 +18,14 @@ class ViewController: UIViewController {
         picker.center = view.center
        
         self.view.addSubview(picker)
+        picker.addTarget(self, action: #selector(datePickerChange(paramdatePicker:)), for: .valueChanged)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    @objc func datePickerChange(paramdatePicker: UIDatePicker){
+        if paramdatePicker.isEqual(self.picker) {
+            print("dateChange :", paramdatePicker.date)
+        }
+    }
 }
 
