@@ -13,6 +13,9 @@
 		A8105B58229C15F40014DF0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8105B57229C15F40014DF0F /* Assets.xcassets */; };
 		A8105B5B229C15F40014DF0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8105B59229C15F40014DF0F /* LaunchScreen.storyboard */; };
 		A8105B63229D79D10014DF0F /* Kitty-meows.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A8105B62229D79D00014DF0F /* Kitty-meows.mp3 */; };
+		A8105B65229DB45B0014DF0F /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8105B64229DB45B0014DF0F /* 3.jpg */; };
+		A8105B67229DB4720014DF0F /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8105B66229DB4720014DF0F /* 2.jpg */; };
+		A8105B69229DB4790014DF0F /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8105B68229DB4790014DF0F /* 1.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		A8105B5A229C15F40014DF0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8105B5C229C15F40014DF0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8105B62229D79D00014DF0F /* Kitty-meows.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Kitty-meows.mp3"; path = "../Kitty-meows.mp3"; sourceTree = "<group>"; };
+		A8105B64229DB45B0014DF0F /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		A8105B66229DB4720014DF0F /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		A8105B68229DB4790014DF0F /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,9 @@
 		A8105B4F229C15F40014DF0F /* badpandaproj */ = {
 			isa = PBXGroup;
 			children = (
+				A8105B68229DB4790014DF0F /* 1.jpg */,
+				A8105B66229DB4720014DF0F /* 2.jpg */,
+				A8105B64229DB45B0014DF0F /* 3.jpg */,
 				A8105B50229C15F40014DF0F /* AppDelegate.swift */,
 				A8105B52229C15F40014DF0F /* ViewController.swift */,
 				A8105B54229C15F40014DF0F /* Main.storyboard */,
@@ -125,8 +134,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8105B69229DB4790014DF0F /* 1.jpg in Resources */,
 				A8105B63229D79D10014DF0F /* Kitty-meows.mp3 in Resources */,
+				A8105B65229DB45B0014DF0F /* 3.jpg in Resources */,
 				A8105B5B229C15F40014DF0F /* LaunchScreen.storyboard in Resources */,
+				A8105B67229DB4720014DF0F /* 2.jpg in Resources */,
 				A8105B58229C15F40014DF0F /* Assets.xcassets in Resources */,
 				A8105B56229C15F40014DF0F /* Main.storyboard in Resources */,
 			);

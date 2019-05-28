@@ -12,52 +12,34 @@ import AVFoundation
 class ViewController: UIViewController {
 
     
-    @IBOutlet weak var sliderBoard: UISlider!
-    
-    var player = AVAudioPlayer()
-
-    let slider = UISlider()
-    
-    @IBAction func pause(_ sender: Any) {
-        self.player.pause()
-    }
-    
-    @IBAction func volumeAction(_ sender: Any) {
-        self.player.volume = self.sliderBoard.value
-    }
-    
-    @IBAction func playAction(_ sender: Any) {
-            self.player.play()
-    }
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    var compSegmentControl = UISegmentedControl()
+    var menuArray = ["One", "Two", "Three"]
+    var imageView = UIImageView()
+    var imageArray = [UIImage(named: "1.jpg"), UIImage(named: "2.jpg"), UIImage(named: "3.jpg")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.slider.frame = CGRect(x: 0, y: 0, width: 300, height: 30)
-        self.slider.center = self.view.center
-        self.slider.minimumValue = 0.0
-        self.slider.maximumValue = 1.0
-        self.view.addSubview(slider)
-        self.slider.addTarget(self, action: #selector(sliderChange), for: .valueChanged)
-        do {
-            if let audioPath = Bundle.main.path(forResource: "Kitty-meows", ofType: "mp3"){
-                try player = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath))
-                self.slider.maximumValue = Float(player.duration)
-            }
-        } catch {
-            print("ERROR")
-        }
-
-        self.player.play()
-
+        self.imageView.frame = CGRect(x: 100, y: 300, width: 200, height: 200)
+     //   self.imageView.center = self.view.center
+      //  self.imageView.image = imageArray[0]
+        self.view.addSubview(imageView)
+        
+        self.compSegmentControl = UISegmentedControl(items: self.menuArray)
+        self.compSegmentControl.frame = CGRect(x: 30, y: 500, width: 300, height: 30)
+        self.view.addSubview(self.compSegmentControl)
+        
+        compSegmentControl.addTarget(self, action: #selector(segmentChange), for: .valueChanged)
     }
 
-    @objc func sliderChange(sender: UISlider){
-        if sender == slider {
-            self.player.currentTime = TimeInterval(sender.value)
-            print(sender.value)
+    @objc func segmentChange(param: UISegmentedControl){
+        if param == self.compSegmentControl {
+            let segmentIndex = param.selectedSegmentIndex
+            self.imageView.image = imageArray[segmentIndex]
         }
     }
+  
     
 }
 
