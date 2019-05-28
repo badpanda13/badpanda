@@ -11,12 +11,20 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
-   var player = AVAudioPlayer()
+    
+    @IBOutlet weak var sliderBoard: UISlider!
+    
+    var player = AVAudioPlayer()
 
+    let slider = UISlider()
+    
     @IBAction func pause(_ sender: Any) {
         self.player.pause()
     }
     
+    @IBAction func volumeAction(_ sender: Any) {
+        self.player.volume = self.sliderBoard.value
+    }
     
     @IBAction func playAction(_ sender: Any) {
             self.player.play()
@@ -25,9 +33,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.slider.frame = CGRect(x: 0, y: 0, width: 300, height: 30)
+        self.slider.center = self.view.center
+        self.slider.minimumValue = 0.0
+        self.slider.maximumValue = 1.0
+        self.view.addSubview(slider)
+        self.slider.addTarget(self, action: #selector(sliderChange), for: .valueChanged)
         do {
             if let audioPath = Bundle.main.path(forResource: "Kitty-meows", ofType: "mp3"){
                 try player = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath))
+                self.slider.maximumValue = Float(player.duration)
             }
         } catch {
             print("ERROR")
@@ -36,23 +51,13 @@ class ViewController: UIViewController {
         self.player.play()
 
     }
-//    var player: AVAudioPlayer?
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        player = initializePlayer()
-//        player?.play()
-//    }
-//
-//    private func initializePlayer() -> AVAudioPlayer? {
-//        guard let path = Bundle.main.path(forResource: "Downloads", ofType: "mp3") else {
-//             print("ERROR")
-//            return nil
-//        }
-//
-//        return try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-//    }
+
+    @objc func sliderChange(sender: UISlider){
+        if sender == slider {
+            self.player.currentTime = TimeInterval(sender.value)
+            print(sender.value)
+        }
+    }
     
 }
 
