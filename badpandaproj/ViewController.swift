@@ -7,25 +7,52 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
-    let picker = UIDatePicker()
+   var player = AVAudioPlayer()
+
+    @IBAction func pause(_ sender: Any) {
+        self.player.pause()
+    }
+    
+    
+    @IBAction func playAction(_ sender: Any) {
+            self.player.play()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        picker.center = view.center
-       
-        self.view.addSubview(picker)
-        picker.addTarget(self, action: #selector(datePickerChange(paramdatePicker:)), for: .valueChanged)
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    @objc func datePickerChange(paramdatePicker: UIDatePicker){
-        if paramdatePicker.isEqual(self.picker) {
-            print("dateChange :", paramdatePicker.date)
+
+        do {
+            if let audioPath = Bundle.main.path(forResource: "Kitty-meows", ofType: "mp3"){
+                try player = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath))
+            }
+        } catch {
+            print("ERROR")
         }
+
+        self.player.play()
+
     }
+//    var player: AVAudioPlayer?
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        player = initializePlayer()
+//        player?.play()
+//    }
+//
+//    private func initializePlayer() -> AVAudioPlayer? {
+//        guard let path = Bundle.main.path(forResource: "Downloads", ofType: "mp3") else {
+//             print("ERROR")
+//            return nil
+//        }
+//
+//        return try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+//    }
+    
 }
 

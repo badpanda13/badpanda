@@ -12,6 +12,7 @@
 		A8105B56229C15F40014DF0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8105B54229C15F40014DF0F /* Main.storyboard */; };
 		A8105B58229C15F40014DF0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8105B57229C15F40014DF0F /* Assets.xcassets */; };
 		A8105B5B229C15F40014DF0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8105B59229C15F40014DF0F /* LaunchScreen.storyboard */; };
+		A8105B63229D79D10014DF0F /* Kitty-meows.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A8105B62229D79D00014DF0F /* Kitty-meows.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		A8105B57229C15F40014DF0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8105B5A229C15F40014DF0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8105B5C229C15F40014DF0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8105B62229D79D00014DF0F /* Kitty-meows.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Kitty-meows.mp3"; path = "../Kitty-meows.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +40,7 @@
 		A8105B44229C15F40014DF0F = {
 			isa = PBXGroup;
 			children = (
+				A8105B62229D79D00014DF0F /* Kitty-meows.mp3 */,
 				A8105B4F229C15F40014DF0F /* badpandaproj */,
 				A8105B4E229C15F40014DF0F /* Products */,
 			);
@@ -122,6 +125,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8105B63229D79D10014DF0F /* Kitty-meows.mp3 in Resources */,
 				A8105B5B229C15F40014DF0F /* LaunchScreen.storyboard in Resources */,
 				A8105B58229C15F40014DF0F /* Assets.xcassets in Resources */,
 				A8105B56229C15F40014DF0F /* Main.storyboard in Resources */,
