@@ -7,38 +7,50 @@
 //
 
 import UIKit
-import AVFoundation
+//import AVFoundation
 
 class ViewController: UIViewController {
 
-    
-    @IBOutlet weak var segmentControl: UISegmentedControl!
-    var compSegmentControl = UISegmentedControl()
-    var menuArray = ["One", "Two", "Three"]
-    var imageView = UIImageView()
-    var imageArray = [UIImage(named: "1.jpg"), UIImage(named: "2.jpg"), UIImage(named: "3.jpg")]
+    var buttonShare = UIButton()
+    var textField = UITextField()
+    var activityViewConctroller: UIActivityViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createTextField()
+        createButton()
 
-        self.imageView.frame = CGRect(x: 100, y: 300, width: 200, height: 200)
-     //   self.imageView.center = self.view.center
-      //  self.imageView.image = imageArray[0]
-        self.view.addSubview(imageView)
-        
-        self.compSegmentControl = UISegmentedControl(items: self.menuArray)
-        self.compSegmentControl.frame = CGRect(x: 30, y: 500, width: 300, height: 30)
-        self.view.addSubview(self.compSegmentControl)
-        
-        compSegmentControl.addTarget(self, action: #selector(segmentChange), for: .valueChanged)
     }
 
-    @objc func segmentChange(param: UISegmentedControl){
-        if param == self.compSegmentControl {
-            let segmentIndex = param.selectedSegmentIndex
-            self.imageView.image = imageArray[segmentIndex]
+    func createTextField(){
+        self.textField.frame = CGRect(x: 0, y: 0, width: 280, height: 30)
+        self.textField.center = self.view.center
+        self.textField.borderStyle = UITextField.BorderStyle.roundedRect
+        self.textField.placeholder = "Enter text for quirell happiness"
+        self.view.addSubview(self.textField)
+    }
+    
+    func createButton(){
+        self.buttonShare = UIButton(type: .roundedRect)
+        self.buttonShare.frame = CGRect(x: 50, y: 350, width: 280, height: 44)
+        self.buttonShare.setTitle("Расшарить", for: .normal)
+        self.buttonShare.addTarget(self, action: #selector(handleShare(param:) ), for: .touchUpInside)
+        self.view.addSubview(self.buttonShare)
+    }
+    
+    @objc func handleShare(param: Any){
+        let text = self.textField.text
+        if text?.count == 0 {
+            let message = "Сообщение само себя не напишет между прочим"
+            let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(action)
+            self.present(alertController, animated: true, completion: nil)
         }
+        self.activityViewConctroller = UIActivityViewController(activityItems: [self.textField.text ?? "nil"], applicationActivities: nil)
+        self.present(self.activityViewConctroller!, animated: true, completion: nil)
     }
+
   
     
 }
