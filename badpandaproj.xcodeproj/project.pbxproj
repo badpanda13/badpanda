@@ -16,6 +16,7 @@
 		A8105B65229DB45B0014DF0F /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8105B64229DB45B0014DF0F /* 3.jpg */; };
 		A8105B67229DB4720014DF0F /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8105B66229DB4720014DF0F /* 2.jpg */; };
 		A8105B69229DB4790014DF0F /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A8105B68229DB4790014DF0F /* 1.jpg */; };
+		A89EC3B3229E9786003B5F8A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89EC3B2229E9786003B5F8A /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		A8105B64229DB45B0014DF0F /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
 		A8105B66229DB4720014DF0F /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		A8105B68229DB4790014DF0F /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		A89EC3B2229E9786003B5F8A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 		A8105B4F229C15F40014DF0F /* badpandaproj */ = {
 			isa = PBXGroup;
 			children = (
+				A89EC3B2229E9786003B5F8A /* SecondViewController.swift */,
 				A8105B68229DB4790014DF0F /* 1.jpg */,
 				A8105B66229DB4720014DF0F /* 2.jpg */,
 				A8105B64229DB45B0014DF0F /* 3.jpg */,
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A89EC3B3229E9786003B5F8A /* SecondViewController.swift in Sources */,
 				A8105B53229C15F40014DF0F /* ViewController.swift in Sources */,
 				A8105B51229C15F40014DF0F /* AppDelegate.swift in Sources */,
 			);
