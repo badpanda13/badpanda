@@ -11,27 +11,21 @@ import UIKit
 
 class ViewController: UIViewController {
 
-   var displaySecondButton = UIButton()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        self.title = "First vc"
+        self.title = "Belka title. First VC"
+       self.view.backgroundColor = UIColor.brown
+        var tabBarItem = UITabBarItem()
+        tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
         
-        self.displaySecondButton = UIButton(type: .system)
-        self.displaySecondButton.setTitle("Second button", for: .normal)
-        self.displaySecondButton.sizeToFit()
-        self.displaySecondButton.center = self.view.center
-        self.displaySecondButton.addTarget(self, action: #selector(changeButton(param:)), for: .touchUpInside)
-        self.view.addSubview(self.displaySecondButton)
+        self.tabBarItem = tabBarItem
+        
 
     }
     
-    @objc func changeButton(param: Any){
-        let secondVC = SecondViewController()
-        self.navigationController?.pushViewController(secondVC, animated: true)
-        
-    }
+ 
 
   
     
