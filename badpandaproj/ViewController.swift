@@ -13,27 +13,22 @@ class ViewController: UIViewController {
 
    
     
-    var myImageView = UIImageView()
-    
-    let imageKsu = UIImage(named: "1.jpg")
+    @IBOutlet var buttons: [UIButton]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //  myImageView = UIImageView(image: imageKsu)
-        //  myImageView = UIImageView(frame: self.view.bounds)
-        myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        myImageView.image = imageKsu
-        myImageView.center = view.center
-        myImageView.contentMode = .scaleAspectFit
-        myImageView.layer.cornerRadius = 180
-        myImageView.clipsToBounds = true
-        self.view.addSubview(myImageView)
         // Do any additional setup after loading the view, typically from a nib.
     }
-
     
+    
+    @IBAction func buttonChange(_ sender: Any) {
+        let button = sender as! UIButton
+        if button.titleLabel?.text == "but1" {
+            print("BUT1")
+        } else if button.tag == 1 {
+            print("BUT2")
+        }
+    }
     
 }
 
