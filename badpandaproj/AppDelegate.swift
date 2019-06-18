@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  badpandaproj
+//  bb
 //
-//  Created by Belka on 5/27/19.
+//  Created by Belka on 6/18/19.
 //  Copyright © 2019 Belka. All rights reserved.
 //
 
@@ -12,16 +12,10 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
- 
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let vc = ViewController()
-
-        self.window?.backgroundColor = UIColor.white
-
-        self.window?.rootViewController = vc
-        self.window?.makeKeyAndVisible()
         return true
     }
 
