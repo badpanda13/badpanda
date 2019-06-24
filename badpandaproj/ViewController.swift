@@ -8,43 +8,57 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIScrollViewDelegate {
+class ViewController: UIViewController, UIWebViewDelegate {
 
+    @IBOutlet weak var back: UIToolbar!
+    @IBOutlet weak var webView: UIWebView!
     
-    var myScrollView = UIScrollView()
-    var myImageView = UIImageView()
+    @IBOutlet weak var activityIcon: UIActivityIndicatorView!
+    @IBOutlet weak var refresh: UIToolbar!
+    @IBOutlet weak var forward: UIToolbar!
+    let application = UIApplication.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let image1 = UIImage(named: "1.jpg")
-         let image2 = UIImage(named: "2.jpg")
-         let image3 = UIImage(named: "3.jpg")
-        let myScrollViewRect = self.view.bounds
-        myScrollView = UIScrollView(frame: myScrollViewRect)
-        myScrollView.isPagingEnabled = true
-        myScrollView.contentSize = CGSize(width: myScrollViewRect.size.width * 3, height: myScrollViewRect.size.height)
-     
-        
-        var imageViewRect = self.view.bounds
-        let imageView1 = self.newImageViewWithImage(paramImage: image1!, paramFrame: imageViewRect)
-        imageViewRect.origin.x += imageViewRect.size.width
-        myScrollView.addSubview(imageView1)
-         let imageView2 = self.newImageViewWithImage(paramImage: image2!, paramFrame: imageViewRect)
-        imageViewRect.origin.x += imageViewRect.size.width
-        myScrollView.addSubview(imageView2)
-         let imageView3 = self.newImageViewWithImage(paramImage: image3!, paramFrame: imageViewRect)
-         myScrollView.addSubview(imageView3)
-        
-           self.view.addSubview(myScrollView)
+        if let myUrl = URL(string: "https://www.google.com/") {
+       // if let myPdf = Bundle.main.url(forResource: "rules", withExtension: "pdf") {
+          let request = URLRequest(url: myUrl)
+          //  let request = URLRequest(url: myPdf)
+            webView.loadRequest(request)
+        }
         
     }
     
-    func newImageViewWithImage(paramImage: UIImage, paramFrame: CGRect) -> UIImageView {
-        let result = UIImageView(frame: paramFrame)
-        result.contentMode = .scaleAspectFit
-        result.image = paramImage
-        return result
+    //MARK: -Activity
+    func isWorkIndicator(isAnimated: Bool, indacator: UIActivityIndicatorView){
+        application.isNetworkActivityIndicatorVisible = isAnimated
+        if isAnimated {
+            activityIcon.startAnimating()
+            activityIcon.isHidden = false
+        } else {
+            activityIcon.stopAnimating()
+            activityIcon.isHidden = true
+        }
+        
+        //однако в уроке этот метод использовался в деприкетед методах, которые я не могу использовать
+    }
+    
+    //MARK: -aCTIONS
+    @IBAction func doRefresh(_ sender: Any) {
+    }
+    
+    @IBAction func goBack(_ sender: Any) {
+        if(webView.canGoBack){
+            webView.goBack()
+        }
+    }
+    
+    
+    @IBAction func goForward(_ sender: Any) {
+        if(webView.canGoForward){
+            webView.goForward()
+        }
     }
 }
 

@@ -17,9 +17,55 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="786-Mc-1OV">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="llV-pP-0cW">
+                                <rect key="frame" x="177" y="271" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wyU-js-OE3">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.98127907426903693" green="0.26127836770470125" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <barButtonItem style="done" systemItem="rewind" id="ge6-Oi-R2Z">
+                                        <connections>
+                                            <action selector="goBack:" destination="BYZ-38-t0r" id="Di9-T7-yTb"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="RAO-4d-CmC"/>
+                                    <barButtonItem style="done" systemItem="fastForward" id="hCk-mi-9BX">
+                                        <connections>
+                                            <action selector="goForward:" destination="BYZ-38-t0r" id="Ehp-MS-UV2"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="refresh" id="sZ8-VX-VIP">
+                                        <connections>
+                                            <action selector="doRefresh:" destination="BYZ-38-t0r" id="aF2-Tf-4wA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="tintColor" red="0.98127907430000005" green="0.26127836770000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="786-Mc-1OV" firstAttribute="top" secondItem="llV-pP-0cW" secondAttribute="bottom" constant="-291" id="BDO-UQ-VOf"/>
+                            <constraint firstItem="786-Mc-1OV" firstAttribute="leading" secondItem="llV-pP-0cW" secondAttribute="trailing" constant="-197" id="bHs-Dc-1ez"/>
+                            <constraint firstItem="786-Mc-1OV" firstAttribute="baseline" secondItem="llV-pP-0cW" secondAttribute="firstBaseline" constant="8" symbolType="layoutAnchor" id="mnx-OS-xLV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="activityIcon" destination="llV-pP-0cW" id="jIr-3x-5Qy"/>
+                        <outlet property="back" destination="wyU-js-OE3" id="5K6-4n-t6F"/>
+                        <outlet property="forward" destination="wyU-js-OE3" id="Pnp-42-EeG"/>
+                        <outlet property="refresh" destination="wyU-js-OE3" id="uyn-Ic-3Py"/>
+                        <outlet property="webView" destination="786-Mc-1OV" id="Lta-kn-JVt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
