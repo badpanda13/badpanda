@@ -10,55 +10,54 @@ import UIKit
 
 class ViewController: UIViewController, UIWebViewDelegate {
 
-    @IBOutlet weak var back: UIToolbar!
-    @IBOutlet weak var webView: UIWebView!
-    
-    @IBOutlet weak var activityIcon: UIActivityIndicatorView!
-    @IBOutlet weak var refresh: UIToolbar!
-    @IBOutlet weak var forward: UIToolbar!
-    let application = UIApplication.shared
+    private var myProgressView = UIProgressView()
+    private var myButton = UIButton()
+    private var myTimer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createProgressView(progressView: myProgressView)
+        createButton(button: myButton)
+        createTimer()
+    }
+    
+    //MARK: - Time
+    func createTimer(){
+        myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+    }
+    //MARK: - Selector
+    @objc func updateProgressView(){
+        if myProgressView.progress != 1.0 {
+            myProgressView.progress += 0.1 / 1.0
+        } else if myProgressView.progress == 1.0 {
+            UIView.animate(withDuration: 0.7, animations: {
+                self.myButton.alpha = 1
+                self.myButton.setTitle("загрузка завершена", for: .normal)
+                self.myTimer.invalidate()
+                })
+        }
+    }
+    
+    //MARK: -UI
+    func createProgressView(progressView: UIProgressView){
+        progressView.progressViewStyle = .bar
+        progressView.frame = CGRect(x: view.center.x, y: view.center.y, width: 150, height: 50)
+        progressView.setProgress(0.0, animated: true)
+        progressView.progressTintColor = UIColor.green
+        progressView.trackTintColor = UIColor.yellow
+        progressView.center = view.center
+        view.addSubview(progressView)
         
-        if let myUrl = URL(string: "https://www.google.com/") {
-       // if let myPdf = Bundle.main.url(forResource: "rules", withExtension: "pdf") {
-          let request = URLRequest(url: myUrl)
-          //  let request = URLRequest(url: myPdf)
-            webView.loadRequest(request)
-        }
+    }
+    
+    func createButton(button: UIButton){
+        button.frame = CGRect(x: view.bounds.width/4, y: view.center.y, width: 150, height: 50)
+        button.setTitle("Загрузка", for: .normal)
+        button.alpha = 0.2
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = .red
+        view.addSubview(button)
         
-    }
-    
-    //MARK: -Activity
-    func isWorkIndicator(isAnimated: Bool, indacator: UIActivityIndicatorView){
-        application.isNetworkActivityIndicatorVisible = isAnimated
-        if isAnimated {
-            activityIcon.startAnimating()
-            activityIcon.isHidden = false
-        } else {
-            activityIcon.stopAnimating()
-            activityIcon.isHidden = true
-        }
-        
-        //однако в уроке этот метод использовался в деприкетед методах, которые я не могу использовать
-    }
-    
-    //MARK: -aCTIONS
-    @IBAction func doRefresh(_ sender: Any) {
-    }
-    
-    @IBAction func goBack(_ sender: Any) {
-        if(webView.canGoBack){
-            webView.goBack()
-        }
-    }
-    
-    
-    @IBAction func goForward(_ sender: Any) {
-        if(webView.canGoForward){
-            webView.goForward()
-        }
     }
 }
 
