@@ -9,68 +9,72 @@
 import UIKit
 
 class ViewController: UIViewController {
-    //UICollisionBehavior - обнаружение столкновений
-    //UIGravityBehavior - имитация гравитации
-    //UIPushBehavior - реагирует на толчки
-    //UISnapBehavior - крепит view к определенной точке
-
-    var animator = UIDynamicAnimator()
+    // UIAttachment -  ghbdzprf
+    // UISnapBehavior - снимок
+    
     var squareView = UIView()
-    var pushBehavior = UIPushBehavior()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       
-        
-    }
-    
+    var squareViewAnchor = UIView()
+    var anchorView = UIView()
+    var animator = UIDynamicAnimator()
+    var attachmentBehavior: UIAttachmentBehavior?
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-       createGestureRecognixer()
-        createSmallSquareView()
-        createAnimationAndBehavior()
+        createGestureRecognizer()
+    
+        creaeSmallSquare()
+             createAnchorView()
+        createAnimationAnBehavior()
     }
     
-    //создаем квадрат
-    func createSmallSquareView(){
-        squareView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80 ))
-        squareView.backgroundColor = UIColor.green
-        squareView.center = view.center
-        view.addSubview(squareView)
+    //сщздаем квадрат
+    func creaeSmallSquare(){
+        squareView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        squareView.backgroundColor = UIColor.yellow
+        squareView.center = self.view.center
+        squareViewAnchor = UIView(frame: CGRect(x: 60, y: 0, width: 20, height: 20))
+        squareViewAnchor.backgroundColor = UIColor.brown
+        squareView.addSubview(squareViewAnchor)
+        self.view.addSubview(squareView)
     }
     
-//    создаем жест
-    func createGestureRecognixer(){
-        let tapGestureRecognixer = UITapGestureRecognizer(target: self, action: #selector(hendlerTap))
-        view.addGestureRecognizer(tapGestureRecognixer)
+    //view с точкой привязки
+    func createAnchorView(){
+        anchorView = UIView(frame: CGRect(x: 120, y: 120, width: 20, height: 20))
+        anchorView.backgroundColor = UIColor.red
+        self.view.addSubview(anchorView)
     }
     
-    //создадим столкновение
-    func createAnimationAndBehavior(){
+    //создаем регистратор жеста панорамирования
+    func createGestureRecognizer(){
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        view.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    //создаем столкновение и прикрепление
+    func createAnimationAnBehavior(){
         animator = UIDynamicAnimator(referenceView: view)
-        //создаем столкновение
-        let collision = UICollisionBehavior(items: [squareView])
+        //столкновения
+        let collision = UICollisionBehavior(items: [squareView ])
         collision.translatesReferenceBoundsIntoBoundary = true
-        pushBehavior = UIPushBehavior(items: [squareView], mode: UIPushBehavior.Mode.continuous)
+        // создает границы, за которые обхект не выпалет
+        attachmentBehavior = UIAttachmentBehavior(item: squareView, attachedToAnchor: anchorView.center)
         animator.addBehavior(collision)
-        animator.addBehavior(pushBehavior)
+        animator.addBehavior(attachmentBehavior!)
     }
     
-    
-    @objc func hendlerTap(paramTap: UITapGestureRecognizer){
-        //получаем угол view
-        let tapPoint: CGPoint = paramTap.location(in: view)
-        let squareViewCenterPoint: CGPoint = squareView.center
-        //определение угла между двумя точками: arc tangent 2(( p1.x - p2.x), (p1.y - p2.y))
-        let deltaX: CGFloat = tapPoint.x - squareViewCenterPoint.x
-        let deltaY: CGFloat = tapPoint.y - squareViewCenterPoint.y
-        let angle: CGFloat = atan2(deltaY, deltaX)
-        pushBehavior.angle = angle
+    // определяет, где палц и передает красный квадрат туда
+    @objc func handlePan(param: UIPanGestureRecognizer){
+       
+        //передать локейшен пальца на вью
+        let tapPoint = param.location(in: view)
+        print(tapPoint)
+        attachmentBehavior?.anchorPoint = tapPoint
+        anchorView.center = tapPoint
         
-        let distanceBetweenPints:CGFloat = sqrt(pow(tapPoint.x - squareViewCenterPoint.x, 2.0) + pow(tapPoint.y - squareViewCenterPoint.y, 2.0))
-        pushBehavior.magnitude = distanceBetweenPints / 200
+        
+        
     }
-    
 }
 
 
