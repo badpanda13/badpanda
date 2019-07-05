@@ -9,59 +9,57 @@
 import UIKit
 
 class ViewController: UIViewController {
-    // UISnapBehavior - делает снимок
     
-    var squareView = UIView()
-    var animator = UIDynamicAnimator()
-    var snapBehavior: UISnapBehavior?
+//    var view1: UIView{
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false;
+//        view.frame = CGRect(x: 0, y: 0, width: 120, height: 120  )
+//        view.backgroundColor = UIColor.red
+//        return view
+//    }
+//
 
+        var viewRed = UIView()
+    var viewBlue = UIView()
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        createGestureRecognizer()
-        createSquare()
-        createAnimatorBehavior()
+        createView(color: UIColor.red, view: viewRed)
+        createView(color: UIColor.blue, view: viewBlue)
+        view.addSubview(viewRed)
+        view.addSubview(viewBlue)
+        
+        let viewFL = ["viewRed":viewRed, "viewBlue":viewBlue]
+        let metrics = ["height":100, "width":view.bounds.width / 3, "top":view.bounds.height / 2]
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[viewRed(height)]|", options:[], metrics: metrics, views: viewFL))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[viewBlue(height)]|", options:[], metrics: metrics, views: viewFL))
+       view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[viewBlue(width)]-(50)-[viewRed(width)]-|", options:[], metrics: metrics, views: viewFL))
+      //  view.addSubview(view1)
+     //    view.addSubview(view2)
+     //   createView1Constraint()
+      //  createView2Constraint()
+    }
+    func createView(color: UIColor, view: UIView){
+        //view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false;
+        //view.frame = CGRect(x: 0, y: 100, width: 120, height: 10  )
+        view.backgroundColor = color
         
     }
+//    func createView1Constraint(){
+////        NSLayoutConstraint(item: view1, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leadingMargin, multiplier: 1, constant: 0).isActive = true
+//           //     NSLayoutConstraint(item: view1, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+//        NSLayoutConstraint(item: view1, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailingMargin, multiplier: 1, constant: 0).isActive = true
+//        NSLayoutConstraint(item: view1, attribute: .top, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1, constant: 80).isActive = true
+//        NSLayoutConstraint(item: view1, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80).isActive = true
+//    }
     
-    func createGestureRecognizer(){
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        view.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    func createSquare(){
-        squareView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        squareView.center = self.view.center
-        squareView.backgroundColor = UIColor.green
-        view.addSubview(squareView)
-    }
-    
-    func createAnimatorBehavior(){
-        animator = UIDynamicAnimator(referenceView: view)
-        let collision = UICollisionBehavior(items: [squareView])
-        collision.translatesReferenceBoundsIntoBoundary = true
-        animator.addBehavior(collision)
-        
-        //зацеп
-        snapBehavior = UISnapBehavior(item: squareView, snapTo: squareView.center)
-        snapBehavior?.damping = 0.5
-        animator.addBehavior(snapBehavior!)
-        
-    }
-    
-    @objc func handleTap(param: UITapGestureRecognizer){
-        //получает угол между точкой касания и view
-        let tapPoint = param.location(in: view)
-        if snapBehavior != nil {
-            animator.removeBehavior(snapBehavior!)
-            
-        }
-        snapBehavior = UISnapBehavior(item: squareView, snapTo: tapPoint)
-        snapBehavior?.damping = 0.5 //средняя осциляция
-        animator.addBehavior(snapBehavior!)
-        
-        
-        
-    }
+//    func createView2Constraint(){
+//        NSLayoutConstraint(item: view2, attribute: .centerX, relatedBy: .equal, toItem: view1, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+//        NSLayoutConstraint(item: view2, attribute: .bottom, relatedBy: .equal, toItem: view1, attribute: .top, multiplier: 1, constant: -8).isActive = true
+//        NSLayoutConstraint(item: view2, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+//        NSLayoutConstraint(item: view2, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+//    }
 }
 
 
