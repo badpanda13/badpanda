@@ -30,31 +30,16 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section{
-        case 0: return 3
-        case 1: return 1
-        case 2: return 2
-        default: break
-        }
-        return 0
-       // return array.count
+        return array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        cell.textLabel?.text = "section \(indexPath.section) - row \(indexPath.row)"
         
-        switch indexPath.section{
-        case 0:
-            cell.backgroundColor = UIColor.red
-            cell.accessoryType = .checkmark
-        case 1:
-            cell.backgroundColor = UIColor.blue
-            cell.accessoryType = .detailButton
-        case 2: cell.backgroundColor = UIColor.yellow
-        default: break
-        }
+        let number = array[indexPath.row]
         
+        cell.textLabel?.text = number
+
         return cell
     }
     
@@ -70,6 +55,10 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
         return 100.0
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let number = array[indexPath.row]
+        print(number)
+    }
     
 }
 
