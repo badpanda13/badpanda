@@ -8,65 +8,68 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    
-//    var view1: UIView{
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false;
-//        view.frame = CGRect(x: 0, y: 0, width: 120, height: 120  )
-//        view.backgroundColor = UIColor.red
-//        return view
-//    }
-//
+class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
-        var viewRed = UIView()
-    var viewBlue = UIView()
-     var viewGreen = UIView()
+
+    var myTableView = UITableView()
+    let identifier = "myCell"
+    var array = ["1","2","3","4","5","6","7","8","9"]
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        createView(color: UIColor.red, view: viewRed)
-        createView(color: UIColor.blue, view: viewBlue)
-        createView(color: UIColor.green, view: viewGreen)
-        view.addSubview(viewRed)
-        view.addSubview(viewBlue)
-        view.addSubview(viewGreen)
-        
-        createViewRedConstraints()
-        createViewBlueConstraints()
-        createViewGreenConstraints()
-
-    }
-    func createView(color: UIColor, view: UIView){
-        view.translatesAutoresizingMaskIntoConstraints = false;
-        view.backgroundColor = color
-        
-    }
-    
-    func createViewRedConstraints(){
-        viewRed.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        viewRed.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1/3).isActive = true
-        viewRed.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        viewRed.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-    }
-    
-    func createViewBlueConstraints(){
-        viewBlue.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        viewBlue.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1/3).isActive = true
-        viewBlue.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        viewBlue.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-    }
-
-    func createViewGreenConstraints(){
-          viewGreen.rightAnchor.constraint(equalTo: viewBlue.rightAnchor).isActive = true
-        viewGreen.leftAnchor.constraint(equalTo: viewRed.leftAnchor).isActive = true
-        viewGreen.bottomAnchor.constraint(equalTo: viewRed.topAnchor, constant: -20).isActive = true
-        viewGreen.heightAnchor.constraint(equalToConstant: 100).isActive = true
-
-        
-    }
+        self.myTableView = UITableView(frame: view.bounds, style: .plain)
+        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
+        self.myTableView.delegate = self
+        myTableView.dataSource = self
+        myTableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(myTableView)
 }
+    //MARK: -UITableViewDataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section{
+        case 0: return 3
+        case 1: return 1
+        case 2: return 2
+        default: break
+        }
+        return 0
+       // return array.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        cell.textLabel?.text = "section \(indexPath.section) - row \(indexPath.row)"
+        
+        switch indexPath.section{
+        case 0:
+            cell.backgroundColor = UIColor.red
+            cell.accessoryType = .checkmark
+        case 1:
+            cell.backgroundColor = UIColor.blue
+            cell.accessoryType = .detailButton
+        case 2: cell.backgroundColor = UIColor.yellow
+        default: break
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        print("Accessory path = ", indexPath)
+        
+        let ounerCell = tableView.cellForRow(at: indexPath)
+        print("Cell table =", ounerCell?.textLabel?.text ?? nil!)
+    }
+    
+    //MARK: -UITableViewDelegate
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
+    }
 
+    
+}
 
