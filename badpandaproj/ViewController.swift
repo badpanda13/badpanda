@@ -8,57 +8,81 @@
 
 import UIKit
 
-class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
+class ViewController: UIViewController {
 
 
-    var myTableView = UITableView()
+    //видео урок где-то со второй трети показывает как работать в сториборде https://www.youtube.com/watch?v=Qmu_GvVwCi0
+    
+    @IBOutlet weak var myTableView: UITableView!
     let identifier = "myCell"
-    var array = ["1","2","3","4","5","6","7","8","9"]
+    var array = ["1","2","3","4","5","6","7"]
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        self.myTableView = UITableView(frame: view.bounds, style: .plain)
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
-        self.myTableView.delegate = self
-        myTableView.dataSource = self
-        myTableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(myTableView)
+        
+       
 }
-    //MARK: -UITableViewDataSource
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+    
+    
+    @IBAction func editTable(_ sender: Any) {
+        myTableView.isEditing = !myTableView.isEditing
     }
     
+
+}
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        
         let number = array[indexPath.row]
-        
         cell.textLabel?.text = number
-
         return cell
     }
     
-    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        print("Accessory path = ", indexPath)
-        
-        let ounerCell = tableView.cellForRow(at: indexPath)
-        print("Cell table =", ounerCell?.textLabel?.text ?? nil!)
+    //delete
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
     }
     
-    //MARK: -UITableViewDelegate
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let number = array[indexPath.row]
-        print(number)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            array.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+        }
     }
     
+    //move
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let item = array[sourceIndexPath.row]
+        array.remove(at: sourceIndexPath.row)
+        array.insert(item, at: destinationIndexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        print(action)
+        if action == #selector(copy(_:)){
+            return true
+        }
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+        if action == #selector(copy(_:)){
+            let cell = tableView.cellForRow(at: indexPath)
+            let pasteBoard = UIPasteboard.general
+            pasteBoard.string = cell?.textLabel?.text
+        }
+    }
 }
 
