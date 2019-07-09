@@ -10,38 +10,41 @@ import UIKit
 
 class MyTableViewController: UITableViewController {
 
-    var itemArray = [Model]()
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var notificationSwitch: UISwitch!
+    @IBOutlet weak var genderSegment: UISegmentedControl!
+    
+    let userDefault = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let item = Model(name: "Tanya Khiz", prof: "designer")
-        itemArray.append(item)
+        
+        //load
+        if let name = userDefault.object(forKey: "name"){
+            nameTextField.text = name as? String
+        }
+        if let lastName = userDefault.object(forKey: "lastName"){
+            lastNameTextField.text = lastName as? String
+        }
+        let notificationSwitchValue = userDefault.bool(forKey: "switch")
+        notificationSwitch.setOn(notificationSwitchValue, animated: true)
+        
+        let genderSegmentValue = userDefault.integer(forKey: "segment")
+        genderSegment.selectedSegmentIndex = genderSegmentValue
+        
         
     }
 
-  
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return itemArray.count
+    @IBAction func saveButton(_ sender: Any) {
+        userDefault.setValue(nameTextField.text, forKey: "name")
+        userDefault.setValue(lastNameTextField.text, forKey: "lastName")
+        userDefault.set(notificationSwitch.isOn, forKey: "switch")
+        userDefault.set(genderSegment.selectedSegmentIndex, forKey: "segment")
+        print("произошло сохранение")
+        lastNameTextField.resignFirstResponder() //чтобы сворачивалась клавиатура
+        
     }
-
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? MyTableViewCell{
-            let item = itemArray[indexPath.row]
-            
-            //  Configure the cell...
-
-            cell.refresh(item)
-            return cell
-        }
-        return UITableViewCell()
-    }
- 
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-
+  
 }
